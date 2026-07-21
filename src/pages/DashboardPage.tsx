@@ -52,7 +52,7 @@ function DashboardPage() {
   }, [services]);
 
   return (
-    <div className="flex flex-1 flex-col gap-4 px-3 py-5 pb-24 sm:gap-6 sm:px-4 sm:py-8 md:pb-8 lg:px-8">
+    <div className="flex flex-1 flex-col gap-4 px-3 py-5 sm:gap-6 sm:px-4 sm:py-8 lg:px-8">
       {/* Header */}
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-3">
@@ -113,9 +113,9 @@ function DashboardPage() {
           <StatsCards services={services} isLoading={servicesLoading} />
 
           {/* Map + Sidebar */}
-          <div className="grid flex-1 gap-4 sm:gap-6 lg:grid-cols-3">
-            <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.4 }} className="overflow-hidden rounded-2xl border border-border shadow-lg sm:rounded-3xl lg:col-span-2">
-              <Suspense fallback={<div className="flex min-h-[280px] items-center justify-center bg-card sm:min-h-[450px]"><div className="h-10 w-10 animate-spin rounded-full border-4 border-primary-light border-t-primary" /></div>}>
+          <div className="grid w-full min-w-0 grid-cols-1 gap-3 sm:gap-4 lg:grid-cols-[minmax(0,2fr)_minmax(0,1fr)] lg:gap-5">
+            <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.3 }} className="h-[200px] w-full min-w-0 overflow-hidden rounded-2xl border border-border shadow-md sm:h-[260px] md:h-[300px] lg:h-[420px]">
+              <Suspense fallback={<div className="flex h-full items-center justify-center bg-card"><div className="h-7 w-7 animate-spin rounded-full border-[3px] border-primary-light border-t-primary" /></div>}>
                 {isOnline ? (
                   <EmergencyMap coordinates={coordinates} services={filteredServices} selectedServiceId={selectedService?.id ?? null} />
                 ) : (
@@ -124,18 +124,16 @@ function DashboardPage() {
               </Suspense>
             </motion.div>
 
-            <motion.aside initial={{ opacity: 0, x: 16 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.4, delay: 0.1 }} className="flex max-h-[400px] flex-col rounded-2xl border border-border bg-card shadow-md sm:rounded-3xl lg:max-h-[600px]">
-              <div className="border-b border-border px-5 py-4">
-                <div className="flex items-center gap-2.5">
-                  <List size={16} className="text-primary" />
-                  <h2 className="text-sm font-bold text-text-primary">{t('dashboard.nearbyPlaces')}</h2>
-                  <span className="ml-auto rounded-full bg-primary-light px-2.5 py-0.5 text-[10px] font-bold text-primary">{filteredServices.length}</span>
-                </div>
+            <motion.aside initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.3, delay: 0.05 }} className="flex w-full min-w-0 max-w-full flex-col overflow-hidden rounded-2xl border border-border bg-card shadow-md sm:max-h-[320px] lg:max-h-[420px]">
+              <div className="flex items-center gap-2 border-b border-border px-3 py-2 sm:px-4 sm:py-2.5">
+                <List size={14} className="shrink-0 text-primary" />
+                <h2 className="truncate text-xs font-bold text-text-primary sm:text-sm">{t('dashboard.nearbyPlaces')}</h2>
+                <span className="ml-auto shrink-0 rounded-full bg-primary-light px-2 py-0.5 text-[9px] font-bold text-primary">{filteredServices.length}</span>
               </div>
-              <div className="border-b border-border px-5 py-3">
+              <div className="overflow-x-auto border-b border-border px-2 py-1.5 sm:px-3 sm:py-2">
                 <CategoryFilter selected={selectedCategory} onChange={setSelectedCategory} counts={categoryCounts} />
               </div>
-              <div className="flex-1 overflow-y-auto px-4 py-4">
+              <div className="flex-1 overflow-y-auto px-2 py-2 sm:px-3 sm:py-2.5">
                 <ServiceList services={filteredServices} isLoading={servicesLoading} userCoordinates={coordinates} selectedServiceId={selectedService?.id ?? null} onSelectService={setSelectedService} />
               </div>
             </motion.aside>

@@ -54,7 +54,7 @@ function HomePage() {
   const { t } = useTranslation();
 
   return (
-    <div className="flex flex-col pb-16 md:pb-0">
+    <div className="flex flex-col">
       {/* Hero Section */}
       <section className="relative overflow-hidden px-3 pb-12 pt-8 sm:px-4 sm:pb-24 sm:pt-20 lg:pb-32 lg:pt-28">
         <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-primary-light/40 via-background to-background" />

@@ -86,7 +86,7 @@ function ContactsPage() {
   };
 
   return (
-    <div className="flex flex-1 flex-col gap-6 px-4 py-6 pb-24 md:pb-6 lg:px-8">
+    <div className="flex flex-1 flex-col gap-4 px-3 py-5 sm:gap-6 sm:px-4 sm:py-6 lg:px-8">
       {/* Header */}
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-3">

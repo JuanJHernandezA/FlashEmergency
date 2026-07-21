@@ -23,7 +23,7 @@ function SOSButton() {
           type="button"
           whileTap={{ scale: 0.9 }}
           onClick={isListening ? stopListening : startListening}
-          className={`fixed bottom-16 left-3 z-40 flex h-10 w-10 items-center justify-center rounded-full border shadow-md transition-all md:bottom-8 md:left-8 ${
+          className={`fixed bottom-4 left-3 z-40 flex h-10 w-10 items-center justify-center rounded-full border shadow-md transition-all md:bottom-8 md:left-8 ${
             isListening
               ? 'border-danger/30 bg-danger-light text-danger'
               : 'border-border bg-card text-text-muted hover:text-primary'
@@ -42,7 +42,7 @@ function SOSButton() {
         animate={{ boxShadow: ['0 0 0 0 rgba(220, 38, 38, 0.4)', '0 0 0 12px rgba(220, 38, 38, 0)', '0 0 0 0 rgba(220, 38, 38, 0)'] }}
         transition={{ boxShadow: { duration: 2, repeat: Infinity, ease: 'easeInOut' } }}
         onClick={handleActivate}
-        className="fixed bottom-16 right-3 z-40 flex h-14 w-14 items-center justify-center rounded-full bg-gradient-to-br from-danger to-danger/80 text-white shadow-xl shadow-danger/40 md:bottom-8 md:right-8 md:h-[72px] md:w-[72px]"
+        className="fixed bottom-4 right-3 z-40 flex h-14 w-14 items-center justify-center rounded-full bg-gradient-to-br from-danger to-danger/80 text-white shadow-xl shadow-danger/40 md:bottom-8 md:right-8 md:h-[72px] md:w-[72px]"
         aria-label="SOS Emergency Button"
       >
         <Siren size={26} />

@@ -97,7 +97,7 @@ function PhotoReportPage() {
   };
 
   return (
-    <div className="flex flex-1 flex-col gap-4 px-3 py-5 pb-20 sm:gap-6 sm:px-4 sm:py-8 md:pb-8 lg:px-8">
+    <div className="flex flex-1 flex-col gap-4 px-3 py-5 sm:gap-6 sm:px-4 sm:py-8 lg:px-8">
       {/* Header */}
       <div className="flex items-center gap-3">
         <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-secondary-light">

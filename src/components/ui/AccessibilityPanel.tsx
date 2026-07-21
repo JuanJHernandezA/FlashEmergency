@@ -43,7 +43,7 @@ function AccessibilityPanel() {
         whileHover={{ scale: 1.05 }}
         whileTap={{ scale: 0.95 }}
         onClick={() => setIsOpen(true)}
-        className="fixed bottom-28 left-3 z-40 flex h-10 w-10 items-center justify-center rounded-full border border-border bg-card text-text-secondary shadow-lg transition-colors hover:bg-primary-light hover:text-primary md:bottom-8 md:left-8 md:h-12 md:w-12"
+        className="fixed bottom-20 left-3 z-40 flex h-10 w-10 items-center justify-center rounded-full border border-border bg-card text-text-secondary shadow-lg transition-colors hover:bg-primary-light hover:text-primary md:bottom-8 md:left-8 md:h-12 md:w-12"
         aria-label={t('accessibility.title')}
       >
         <Accessibility size={20} />

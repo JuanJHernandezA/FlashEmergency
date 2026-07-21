@@ -1,265 +1,125 @@
-Read `rules.md` and inspect the entire FlashEmergency project.
+Read rules.md and inspect the Dashboard layout, especially the Emergency Map and Nearby Places sections.
 
-Perform a complete responsive design audit and fix the existing UI.
+Fix the mobile layout proportions.
 
-The application currently has significant responsive issues.
+The current problem is that:
 
-Do not create new features.
+- The map occupies too much vertical space on mobile.
+- The Nearby Places section also occupies too much space.
+- The Dashboard feels too long and requires excessive scrolling.
 
-Do not change the business logic.
-
-Focus only on responsive design, layout, spacing, sizing and usability across different screen sizes.
-
----
-
-# Responsive Audit
-
-Inspect every page and component, including:
-
-- Dashboard.
-- Emergency Map.
-- AI Assistant.
-- Guided AI flow.
-- Emergency Reports.
-- Emergency Contacts.
-- History.
-- Accessibility Settings.
-- Medical Profile if implemented.
-- QR Emergency Card if implemented.
-- Navigation.
-- Bottom navigation.
-- Modals.
-- Dialogs.
-- Forms.
-- Cards.
-- Maps.
-- Emergency buttons.
-- Empty states.
-- Loading states.
-- Error states.
+Do not modify business logic, API calls, filtering or map functionality.
 
 ---
 
-# Screen Sizes
+## Mobile Map
 
-Ensure the application works correctly on:
+On small screens:
 
-- Small mobile phones: 320px - 375px.
-- Standard mobile phones: 390px - 430px.
-- Tablets.
-- Small laptops.
-- Desktop screens.
-- Large desktop screens.
+- Reduce the map height.
+- Use a compact but usable responsive height.
+- Avoid using excessive `min-height` or fixed heights that make the map dominate the screen.
+- Ensure map controls remain visible.
+- Keep the map usable for selecting locations and markers.
 
----
+The map should feel like a compact section of the Dashboard, not the entire page.
 
-# Mobile Requirements
+Use responsive Tailwind classes.
 
-On mobile:
+Example approach:
 
-- Prevent horizontal overflow.
-- Avoid content being cut off.
-- Avoid buttons going outside the viewport.
-- Use appropriate horizontal padding.
-- Ensure text wraps correctly.
-- Make touch targets large enough.
-- Prevent cards from becoming too wide.
-- Ensure forms fit the screen.
-- Ensure modals fit the viewport.
-- Ensure maps have an appropriate height.
-- Ensure emergency actions are easy to reach.
-- Ensure the bottom navigation does not cover page content.
+- Mobile: compact map height.
+- Tablet: medium map height.
+- Desktop: larger map height.
+
+Do not use the same large height on every screen size.
 
 ---
 
-# Dashboard
+## Nearby Places
 
-Review the entire Dashboard.
-
-Fix:
-
-- Card layout.
-- Emergency button sizing.
-- Current location section.
-- Coordinates.
-- Emergency services.
-- Map size.
-- Statistics.
-- Spacing.
-- Text wrapping.
-- Responsive grid behavior.
-
-The dashboard must work correctly in both:
-
-- Single-column mobile layout.
-- Multi-column tablet and desktop layout.
-
----
-
-# Bottom Navigation
-
-Audit the bottom navigation.
+Reduce the vertical space used by the Nearby Places section on mobile.
 
 Ensure:
 
-- It stays inside the viewport.
-- It does not overlap content.
-- It does not cover buttons or forms.
-- It works on small screens.
-- Icons and labels are readable.
-- Touch targets are accessible.
-- Active state is clearly visible.
-- Safe area padding is supported for mobile devices.
+- Cards are compact.
+- Cards do not have excessive padding.
+- Avoid unnecessarily large fixed heights.
+- Avoid excessive gaps between cards.
+- Keep important information visible.
+- Keep Get Directions accessible.
 
-Use appropriate bottom padding on pages so content is never hidden behind the navigation.
+On mobile, nearby places should use a compact single-column layout.
 
----
-
-# Navigation and Header
-
-Ensure:
-
-- The header adapts to small screens.
-- Long titles do not overflow.
-- Buttons do not collide.
-- Menus fit within the viewport.
-- Accessibility controls remain usable.
-- Theme and language controls remain accessible.
+On tablet and desktop, use responsive columns when appropriate.
 
 ---
 
-# AI Assistant
+## Dashboard Spacing
 
-Review the chat interface on mobile.
+Review the spacing between:
 
-Ensure:
+- Current Location.
+- Emergency Number.
+- Map.
+- Nearby Places.
 
-- Messages wrap correctly.
-- Long messages do not overflow.
-- The input does not get hidden by bottom navigation.
-- Quick action buttons wrap correctly.
-- Guided AI buttons fit small screens.
-- The keyboard does not make the input unusable.
-- The send button remains accessible.
+Reduce excessive:
 
----
+- `padding`
+- `margin`
+- `gap`
+- fixed heights
+- empty space
 
-# Emergency Map
+Only on small screens where appropriate.
 
-Ensure:
-
-- The map has an appropriate responsive height.
-- Controls do not overlap.
-- Emergency service cards fit the viewport.
-- Get Directions buttons are fully visible.
-- Text has sufficient contrast.
-- Cards stack correctly on mobile.
+Keep the desktop design comfortable and spacious.
 
 ---
 
-# Emergency Reports
+## Responsive Behavior
 
-Ensure:
+Use a mobile-first approach.
 
-- Forms fit small screens.
-- Photo upload areas are responsive.
-- Image previews do not overflow.
-- Buttons stack when necessary.
-- Share and Send to Emergency Contact buttons remain visible.
-- Report details are readable on mobile.
+Suggested behavior:
 
----
+Mobile:
+- Compact map.
+- Compact cards.
+- Reduced spacing.
+- Single-column layout.
 
-# History
+Tablet:
+- Medium map.
+- Balanced spacing.
+- Responsive grid.
 
-Ensure:
-
-- AI conversations fit small screens.
-- Emergency reports fit small screens.
-- Long descriptions wrap correctly.
-- Cards do not overflow.
-- Detail pages are responsive.
-
----
-
-# Accessibility
-
-Verify responsive behavior for:
-
-- Font size increase.
-- Dark mode.
-- Light mode.
-- Language switching.
-- Screen reading controls.
-
-The interface must remain usable when the font size is increased.
+Desktop:
+- Larger map.
+- Multi-column layout where appropriate.
+- Comfortable spacing.
 
 ---
 
-# Tailwind Requirements
+## Important
 
-Use responsive Tailwind CSS utilities.
+Do not redesign the entire Dashboard.
 
-Prefer:
+Do not remove existing functionality.
 
-- Mobile-first styles.
-- `sm:`
-- `md:`
-- `lg:`
-- `xl:`
+Do not change the map behavior.
 
-Avoid:
+Do not change the nearby places filtering.
 
-- Fixed widths that cause overflow.
-- Hardcoded viewport-breaking dimensions.
-- Excessive absolute positioning.
-- Negative margins that break mobile layouts.
-- Fixed heights for dynamic content.
-- Desktop-first layouts.
+Only improve the responsive proportions and vertical space usage.
 
-Use:
-
-- `w-full`
-- `max-w-*`
-- `min-w-0`
-- `flex-wrap`
-- Responsive grids.
-- Responsive padding.
-- Responsive gaps.
-- `overflow-hidden` only when appropriate.
-
----
-
-# Final Validation
-
-After making changes:
-
-1. Check every route.
-2. Check every main component.
-3. Check mobile layout.
-4. Check tablet layout.
-5. Check desktop layout.
-6. Check light mode.
-7. Check dark mode.
-8. Check increased font size.
-9. Check bottom navigation.
-10. Check horizontal overflow.
-
-The application must not have:
-
-- Horizontal scrolling caused by layout bugs.
-- Cut-off text.
-- Buttons outside the viewport.
-- Cards overflowing.
-- Content hidden behind bottom navigation.
-- Broken mobile layouts.
-
-Do not modify business logic.
-
-Do not add new features.
-
-Do not add unnecessary dependencies.
-
-Use the existing architecture and design system.
+Use Tailwind CSS responsive utilities.
 
 Keep the project compiling.
+
+Inspect all fixed heights such as h-[500px], min-h-screen, large padding and excessive gaps in the Dashboard.
+
+Replace them with responsive values appropriate for mobile, tablet and desktop.
+
+Do not blindly apply min-h-screen to sections that should only occupy their content height.

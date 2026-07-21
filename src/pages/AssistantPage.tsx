@@ -175,7 +175,7 @@ function AssistantPage() {
   };
 
   return (
-    <div className="flex flex-1 flex-col pb-16 md:pb-0">
+    <div className="flex flex-1 flex-col pb-4 md:pb-0">
       {/* Header */}
       <div className="border-b border-border/60 bg-card/80 px-4 py-4 backdrop-blur-sm lg:px-8">
         <div className="mx-auto flex max-w-4xl items-center justify-between">
