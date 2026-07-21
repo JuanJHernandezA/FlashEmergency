@@ -1,0 +1,164 @@
+{
+  "app": { "name": "Flash Emergency", "badge": "Emergency Assistant App" },
+  "nav": { "home": "Home", "dashboard": "Dashboard", "assistant": "Assistant", "contacts": "Contacts", "history": "History" },
+  "hero": {
+    "title": "Emergency Help,",
+    "titleHighlight": "Instantly",
+    "subtitle": "Flash Emergency combines AI-powered guidance, GPS location, and nearby emergency services to help you act fast when every second counts.",
+    "startNow": "Start Now",
+    "aiAssistant": "AI Assistant",
+    "free": "Free & Open",
+    "offline": "Works Offline",
+    "noSignup": "No Sign-up"
+  },
+  "features": {
+    "label": "Features",
+    "title": "Everything You Need in an Emergency",
+    "subtitle": "Critical tools combined in one place to reduce response time and save lives.",
+    "nearbyServices": "Nearby Services",
+    "nearbyServicesDesc": "Find hospitals, clinics, pharmacies, police and fire stations near you instantly.",
+    "aiFirstAid": "AI First Aid",
+    "aiFirstAidDesc": "Get step-by-step emergency guidance powered by artificial intelligence.",
+    "shareLocation": "Share Location",
+    "shareLocationDesc": "Send your exact GPS coordinates to emergency contacts with one tap.",
+    "voiceControl": "Voice Control",
+    "voiceControlDesc": "Speak your emergency and listen to instructions hands-free.",
+    "offlineMode": "Offline Mode",
+    "offlineModeDesc": "Access saved contacts, guides, and your last known location without internet.",
+    "sosButton": "SOS Button",
+    "sosButtonDesc": "One-tap emergency alert that vibrates, shares location, and notifies contacts.",
+    "emergencyContacts": "Emergency Contacts",
+    "emergencyContactsDesc": "Save trusted contacts for quick access during emergencies.",
+    "historyFeature": "History",
+    "historyFeatureDesc": "Review previous searches and AI conversations for future reference."
+  },
+  "cta": {
+    "title": "Be Prepared, Not Scared",
+    "subtitle": "Emergencies happen without warning. Flash Emergency equips you with the tools to stay calm, act fast, and get the right help.",
+    "openDashboard": "Open Dashboard"
+  },
+  "disclaimer": "Flash Emergency is an informational emergency assistant. It does not replace doctors, hospitals, ambulances, or emergency services. Always contact your local emergency number in life-threatening situations.",
+  "dashboard": {
+    "title": "Emergency Dashboard",
+    "subtitle": "Location & nearby emergency services",
+    "refresh": "Refresh",
+    "gettingLocation": "Getting your location...",
+    "tryAgain": "Try Again",
+    "searching": "Searching...",
+    "found": "found",
+    "nearbyPlaces": "Nearby Places",
+    "nearest": "Nearest",
+    "hospitals": "Hospitals",
+    "pharmacies": "Pharmacies",
+    "police": "Police",
+    "fireStations": "Fire Stations",
+    "noServicesFound": "No services found nearby",
+    "tryRefreshing": "Try refreshing your location",
+    "getDirections": "Get Directions",
+    "openingNavigation": "Opening navigation...",
+    "openInMaps": "Open in Maps",
+    "emergencyNumber": "Emergency Number",
+    "call": "Call"
+  },
+  "categories": {
+    "all": "All",
+    "hospital": "Hospital",
+    "clinic": "Clinic",
+    "pharmacy": "Pharmacy",
+    "police": "Police Station",
+    "fire_station": "Fire Station"
+  },
+  "assistant": {
+    "title": "AI Emergency Assistant",
+    "poweredBy": "Powered by Groq AI",
+    "clear": "Clear",
+    "howCanIHelp": "How can I help you?",
+    "describeEmergency": "Describe your emergency and I will provide step-by-step first aid guidance. You can type or use voice input.",
+    "disclaimer": "This assistant does not replace professional medical services. Always call emergency services in life-threatening situations.",
+    "placeholder": "Describe your emergency...",
+    "listening": "Listening... Speak now",
+    "listen": "Listen",
+    "stop": "Stop",
+    "prompts": {
+      "choking": "My child is choking",
+      "heartAttack": "Someone is having a heart attack",
+      "burn": "I burned my hand",
+      "fainted": "Someone fainted"
+    }
+  },
+  "contacts": {
+    "title": "Emergency Contacts",
+    "subtitle": "Trusted people to alert during emergencies.",
+    "add": "Add",
+    "addContact": "Add Contact",
+    "editContact": "Edit Contact",
+    "noContacts": "No contacts yet",
+    "noContactsDesc": "Add trusted contacts to quickly share your location during emergencies.",
+    "name": "Name",
+    "namePlaceholder": "Mom, Dad, Brother...",
+    "phone": "Phone",
+    "phonePlaceholder": "+1 234 567 8900",
+    "relation": "Relation (optional)",
+    "relationPlaceholder": "Mother, Friend, Partner...",
+    "cancel": "Cancel",
+    "save": "Save",
+    "contactAdded": "Contact added",
+    "contactUpdated": "Contact updated",
+    "contactRemoved": "removed",
+    "failedSave": "Failed to save contact",
+    "failedDelete": "Failed to delete contact"
+  },
+  "history": {
+    "title": "History",
+    "subtitle": "Previous searches and AI conversations.",
+    "clearAll": "Clear All",
+    "noHistory": "No history yet",
+    "noHistoryDesc": "Your emergency searches and AI conversations will appear here.",
+    "entryRemoved": "Entry removed",
+    "historyCleared": "History cleared",
+    "failedDelete": "Failed to delete entry",
+    "failedClear": "Failed to clear history",
+    "localOnly": "History is stored locally on this device only.",
+    "aiConversation": "AI Conversation",
+    "search": "Search"
+  },
+  "sos": {
+    "title": "SOS Emergency",
+    "subtitle": "Share your location quickly",
+    "shareLocation": "Share Location",
+    "copyCoords": "Copy Coords",
+    "copyMessage": "Copy Message",
+    "call": "Call",
+    "locationUnavailable": "Location unavailable. Enable GPS for full functionality.",
+    "locationShared": "Location shared successfully",
+    "messageCopied": "Emergency message copied to clipboard",
+    "coordsCopied": "Coordinates copied to clipboard",
+    "locationError": "Location not available. Please enable GPS.",
+    "failedCopy": "Failed to copy",
+    "disclaimer": "Always contact your local emergency number in life-threatening situations."
+  },
+  "offline": {
+    "message": "You are offline. Some features may be limited."
+  },
+  "install": {
+    "title": "Install Flash Emergency",
+    "subtitle": "Install for quick access and offline support.",
+    "button": "Install",
+    "success": "App installed successfully!"
+  },
+  "notFound": {
+    "title": "404",
+    "message": "Page not found. The page you are looking for does not exist.",
+    "backHome": "Back to Home"
+  },
+  "footer": {
+    "disclaimer": "Informational emergency assistant only. Does not replace professional medical services."
+  },
+  "errors": {
+    "locationDenied": "Location permission denied. Please enable it in your browser settings.",
+    "locationUnavailable": "Location information is unavailable.",
+    "locationTimeout": "The request to get your location timed out.",
+    "locationUnknown": "An unknown error occurred while getting your location.",
+    "geolocationUnsupported": "Geolocation is not supported by your browser."
+  }
+}

@@ -1,0 +1,164 @@
+{
+  "app": { "name": "Flash Emergency", "badge": "App de Asistencia en Emergencias" },
+  "nav": { "home": "Inicio", "dashboard": "Panel", "assistant": "Asistente", "contacts": "Contactos", "history": "Historial" },
+  "hero": {
+    "title": "Ayuda de Emergencia,",
+    "titleHighlight": "Al Instante",
+    "subtitle": "Flash Emergency combina guía con IA, ubicación GPS y servicios de emergencia cercanos para ayudarte a actuar rápido cuando cada segundo cuenta.",
+    "startNow": "Comenzar",
+    "aiAssistant": "Asistente IA",
+    "free": "Gratis y Abierto",
+    "offline": "Funciona Sin Internet",
+    "noSignup": "Sin Registro"
+  },
+  "features": {
+    "label": "Funciones",
+    "title": "Todo lo que Necesitas en una Emergencia",
+    "subtitle": "Herramientas críticas combinadas en un solo lugar para reducir el tiempo de respuesta.",
+    "nearbyServices": "Servicios Cercanos",
+    "nearbyServicesDesc": "Encuentra hospitales, clínicas, farmacias, policía y bomberos cerca de ti al instante.",
+    "aiFirstAid": "Primeros Auxilios IA",
+    "aiFirstAidDesc": "Obtén guía paso a paso para emergencias con inteligencia artificial.",
+    "shareLocation": "Compartir Ubicación",
+    "shareLocationDesc": "Envía tus coordenadas GPS exactas a contactos de emergencia con un toque.",
+    "voiceControl": "Control por Voz",
+    "voiceControlDesc": "Habla tu emergencia y escucha instrucciones en manos libres.",
+    "offlineMode": "Modo Sin Conexión",
+    "offlineModeDesc": "Accede a contactos guardados, guías y tu última ubicación sin internet.",
+    "sosButton": "Botón SOS",
+    "sosButtonDesc": "Alerta de emergencia que vibra, comparte ubicación y notifica a contactos.",
+    "emergencyContacts": "Contactos de Emergencia",
+    "emergencyContactsDesc": "Guarda contactos de confianza para acceso rápido en emergencias.",
+    "historyFeature": "Historial",
+    "historyFeatureDesc": "Revisa búsquedas anteriores y conversaciones con la IA."
+  },
+  "cta": {
+    "title": "Prepárate, No te Asustes",
+    "subtitle": "Las emergencias ocurren sin aviso. Flash Emergency te equipa con las herramientas para mantener la calma, actuar rápido y obtener la ayuda correcta.",
+    "openDashboard": "Abrir Panel"
+  },
+  "disclaimer": "Flash Emergency es un asistente informativo de emergencias. No reemplaza médicos, hospitales, ambulancias ni servicios de emergencia. Siempre contacta tu número de emergencia local en situaciones que amenazan la vida.",
+  "dashboard": {
+    "title": "Panel de Emergencia",
+    "subtitle": "Ubicación y servicios de emergencia cercanos",
+    "refresh": "Actualizar",
+    "gettingLocation": "Obteniendo tu ubicación...",
+    "tryAgain": "Reintentar",
+    "searching": "Buscando...",
+    "found": "encontrados",
+    "nearbyPlaces": "Lugares Cercanos",
+    "nearest": "Más Cercano",
+    "hospitals": "Hospitales",
+    "pharmacies": "Farmacias",
+    "police": "Policía",
+    "fireStations": "Bomberos",
+    "noServicesFound": "No se encontraron servicios cercanos",
+    "tryRefreshing": "Intenta actualizar tu ubicación",
+    "getDirections": "Cómo Llegar",
+    "openingNavigation": "Abriendo navegación...",
+    "openInMaps": "Abrir en Mapa",
+    "emergencyNumber": "Número de Emergencia",
+    "call": "Llamar"
+  },
+  "categories": {
+    "all": "Todos",
+    "hospital": "Hospital",
+    "clinic": "Clínica",
+    "pharmacy": "Farmacia",
+    "police": "Estación de Policía",
+    "fire_station": "Estación de Bomberos"
+  },
+  "assistant": {
+    "title": "Asistente IA de Emergencia",
+    "poweredBy": "Impulsado por Groq AI",
+    "clear": "Limpiar",
+    "howCanIHelp": "¿Cómo puedo ayudarte?",
+    "describeEmergency": "Describe tu emergencia y te proporcionaré guía paso a paso de primeros auxilios. Puedes escribir o usar entrada de voz.",
+    "disclaimer": "Este asistente no reemplaza servicios médicos profesionales. Siempre llama a servicios de emergencia en situaciones que amenazan la vida.",
+    "placeholder": "Describe tu emergencia...",
+    "listening": "Escuchando... Habla ahora",
+    "listen": "Escuchar",
+    "stop": "Detener",
+    "prompts": {
+      "choking": "Mi hijo se está ahogando",
+      "heartAttack": "Alguien está teniendo un infarto",
+      "burn": "Me quemé la mano",
+      "fainted": "Alguien se desmayó"
+    }
+  },
+  "contacts": {
+    "title": "Contactos de Emergencia",
+    "subtitle": "Personas de confianza para alertar en emergencias.",
+    "add": "Agregar",
+    "addContact": "Agregar Contacto",
+    "editContact": "Editar Contacto",
+    "noContacts": "Sin contactos aún",
+    "noContactsDesc": "Agrega contactos de confianza para compartir rápidamente tu ubicación en emergencias.",
+    "name": "Nombre",
+    "namePlaceholder": "Mamá, Papá, Hermano...",
+    "phone": "Teléfono",
+    "phonePlaceholder": "+57 300 123 4567",
+    "relation": "Relación (opcional)",
+    "relationPlaceholder": "Madre, Amigo, Pareja...",
+    "cancel": "Cancelar",
+    "save": "Guardar",
+    "contactAdded": "Contacto agregado",
+    "contactUpdated": "Contacto actualizado",
+    "contactRemoved": "eliminado",
+    "failedSave": "Error al guardar contacto",
+    "failedDelete": "Error al eliminar contacto"
+  },
+  "history": {
+    "title": "Historial",
+    "subtitle": "Búsquedas anteriores y conversaciones con la IA.",
+    "clearAll": "Limpiar Todo",
+    "noHistory": "Sin historial aún",
+    "noHistoryDesc": "Tus búsquedas de emergencia y conversaciones con la IA aparecerán aquí.",
+    "entryRemoved": "Entrada eliminada",
+    "historyCleared": "Historial limpiado",
+    "failedDelete": "Error al eliminar entrada",
+    "failedClear": "Error al limpiar historial",
+    "localOnly": "El historial se almacena localmente solo en este dispositivo.",
+    "aiConversation": "Conversación IA",
+    "search": "Búsqueda"
+  },
+  "sos": {
+    "title": "Emergencia SOS",
+    "subtitle": "Comparte tu ubicación rápidamente",
+    "shareLocation": "Compartir Ubicación",
+    "copyCoords": "Copiar Coords",
+    "copyMessage": "Copiar Mensaje",
+    "call": "Llamar",
+    "locationUnavailable": "Ubicación no disponible. Habilita el GPS para funcionalidad completa.",
+    "locationShared": "Ubicación compartida exitosamente",
+    "messageCopied": "Mensaje de emergencia copiado al portapapeles",
+    "coordsCopied": "Coordenadas copiadas al portapapeles",
+    "locationError": "Ubicación no disponible. Por favor habilita el GPS.",
+    "failedCopy": "Error al copiar",
+    "disclaimer": "Siempre contacta tu número de emergencia local en situaciones que amenazan la vida."
+  },
+  "offline": {
+    "message": "Estás sin conexión. Algunas funciones pueden estar limitadas."
+  },
+  "install": {
+    "title": "Instalar Flash Emergency",
+    "subtitle": "Instala para acceso rápido y soporte sin conexión.",
+    "button": "Instalar",
+    "success": "¡App instalada exitosamente!"
+  },
+  "notFound": {
+    "title": "404",
+    "message": "Página no encontrada. La página que buscas no existe.",
+    "backHome": "Volver al Inicio"
+  },
+  "footer": {
+    "disclaimer": "Asistente informativo de emergencia. No reemplaza servicios médicos profesionales."
+  },
+  "errors": {
+    "locationDenied": "Permiso de ubicación denegado. Por favor habilítalo en la configuración de tu navegador.",
+    "locationUnavailable": "La información de ubicación no está disponible.",
+    "locationTimeout": "La solicitud para obtener tu ubicación expiró.",
+    "locationUnknown": "Ocurrió un error desconocido al obtener tu ubicación.",
+    "geolocationUnsupported": "La geolocalización no es compatible con tu navegador."
+  }
+}
