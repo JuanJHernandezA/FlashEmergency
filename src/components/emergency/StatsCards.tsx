@@ -37,12 +37,12 @@ function StatsCards({ services, isLoading }: IStatsCardsProps) {
       variants={containerVariants}
       initial="hidden"
       animate="visible"
-      className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-5"
+      className="grid grid-cols-2 gap-2 sm:gap-4 sm:grid-cols-3 lg:grid-cols-5"
     >
       {/* Nearest service card */}
       <motion.div
         variants={itemVariants}
-        className="col-span-2 flex items-center gap-4 rounded-2xl border border-border bg-card p-4 shadow-md sm:col-span-1"
+        className="col-span-2 flex items-center gap-3 rounded-2xl border border-border bg-card p-3 shadow-md sm:col-span-1 sm:gap-4 sm:p-4"
       >
         <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-success-light">
           <MapPin size={20} className="text-success" />
@@ -73,7 +73,7 @@ function StatsCards({ services, isLoading }: IStatsCardsProps) {
           <motion.div
             key={key}
             variants={itemVariants}
-            className="flex items-center gap-4 rounded-2xl border border-border bg-card p-4 shadow-md"
+            className="flex items-center gap-3 rounded-2xl border border-border bg-card p-3 shadow-md sm:gap-4 sm:p-4"
           >
             <div className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl ${bg}`}>
               <Icon size={20} className={color} />

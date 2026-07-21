@@ -1,192 +1,265 @@
-# Priority 18 - Guided AI Emergency Flow
+Read `rules.md` and inspect the entire FlashEmergency project.
 
-Status: TODO
+Perform a complete responsive design audit and fix the existing UI.
 
-## Goal
+The application currently has significant responsive issues.
 
-Improve the AI Assistant by adding a guided emergency flow.
+Do not create new features.
 
-The user should not always need to start by typing a free-form message.
+Do not change the business logic.
 
-The flow must guide the user through quick emergency categories and then ask contextual questions.
-
----
-
-## 1. Initial Question
-
-When starting a new AI conversation, display:
-
-"What happened?"
-
-Show quick action buttons:
-
-- Burn
-- Cut
-- Fall
-- Choking
-- Chest Pain
-- Other
-
-Use Lucide React icons.
-
-Do not use emojis.
+Focus only on responsive design, layout, spacing, sizing and usability across different screen sizes.
 
 ---
 
-## 2. Quick Selection
+# Responsive Audit
 
-When the user selects a category:
+Inspect every page and component, including:
 
-- Add the selected situation as a user message.
-- Save it to the current AI conversation.
-- Send the context to the existing AI service.
-- The AI must ask relevant follow-up questions.
-
-Do not create a new chat for every question.
-
----
-
-## 3. Contextual Questions
-
-The AI should ask questions based on the selected emergency.
-
-Examples:
-
-### Burn
-
-Ask:
-
-- What caused the burn?
-- How large is the affected area?
-- Is the skin blistered?
-- Is the person conscious?
-
-### Cut
-
-Ask:
-
-- How deep is the wound?
-- Is there heavy bleeding?
-- Is the bleeding controlled?
-- Is the person conscious?
-
-### Fall
-
-Ask:
-
-- Did the person hit their head?
-- Is the person conscious?
-- Can they move?
-- Is there severe pain?
-
-### Choking
-
-Ask:
-
-- Is the person conscious?
-- Can they breathe?
-- Can they speak or cough?
-
-### Chest Pain
-
-Ask:
-
-- Is the person conscious?
-- Is the pain severe?
-- Is there difficulty breathing?
-- Does the pain spread to the arm, jaw or back?
-
-### Other
-
-Allow the user to describe the emergency using text.
+- Dashboard.
+- Emergency Map.
+- AI Assistant.
+- Guided AI flow.
+- Emergency Reports.
+- Emergency Contacts.
+- History.
+- Accessibility Settings.
+- Medical Profile if implemented.
+- QR Emergency Card if implemented.
+- Navigation.
+- Bottom navigation.
+- Modals.
+- Dialogs.
+- Forms.
+- Cards.
+- Maps.
+- Emergency buttons.
+- Empty states.
+- Loading states.
+- Error states.
 
 ---
 
-## 4. Emergency Context
+# Screen Sizes
 
-Include the following context in the AI request:
+Ensure the application works correctly on:
 
-- Selected emergency type.
-- User language.
-- Detected country.
-- Local emergency number.
-- Current location if available.
-
-The AI must use the correct local emergency number.
-
-The AI must never invent an emergency number.
+- Small mobile phones: 320px - 375px.
+- Standard mobile phones: 390px - 430px.
+- Tablets.
+- Small laptops.
+- Desktop screens.
+- Large desktop screens.
 
 ---
 
-## 5. Critical Emergency Detection
+# Mobile Requirements
 
-If the user describes a potentially life-threatening situation:
+On mobile:
 
-- Clearly recommend calling the local emergency number.
-- Show the emergency number prominently.
-- Provide a Call Emergency button.
-- Do not bury the emergency action inside a long AI response.
-
----
-
-## 6. UI
-
-Create a clean guided flow:
-
-Question:
-
-"What happened?"
-
-Quick actions:
-
-[Burn] [Cut] [Fall]
-
-[Choking] [Chest Pain] [Other]
-
-After selecting an option:
-
-- Show the selected category.
-- Display the next AI question.
-- Allow quick answers when appropriate.
-- Keep the normal text input available.
-
-The user must be able to switch to free text at any time.
+- Prevent horizontal overflow.
+- Avoid content being cut off.
+- Avoid buttons going outside the viewport.
+- Use appropriate horizontal padding.
+- Ensure text wraps correctly.
+- Make touch targets large enough.
+- Prevent cards from becoming too wide.
+- Ensure forms fit the screen.
+- Ensure modals fit the viewport.
+- Ensure maps have an appropriate height.
+- Ensure emergency actions are easy to reach.
+- Ensure the bottom navigation does not cover page content.
 
 ---
 
-## 7. Conversation Persistence
+# Dashboard
 
-Every selected category, user answer and AI response must be saved immediately.
+Review the entire Dashboard.
 
-The conversation must continue working when:
+Fix:
 
-- Navigating to another page.
-- Returning to the AI Assistant.
-- Opening the conversation from History.
+- Card layout.
+- Emergency button sizing.
+- Current location section.
+- Coordinates.
+- Emergency services.
+- Map size.
+- Statistics.
+- Spacing.
+- Text wrapping.
+- Responsive grid behavior.
 
-Use the existing IndexedDB architecture.
+The dashboard must work correctly in both:
+
+- Single-column mobile layout.
+- Multi-column tablet and desktop layout.
 
 ---
 
-## 8. Accessibility
+# Bottom Navigation
 
-- Keyboard accessible.
-- Clear focus states.
-- Large touch targets.
-- Good color contrast.
-- Screen reader labels.
-- Light and dark mode support.
+Audit the bottom navigation.
+
+Ensure:
+
+- It stays inside the viewport.
+- It does not overlap content.
+- It does not cover buttons or forms.
+- It works on small screens.
+- Icons and labels are readable.
+- Touch targets are accessible.
+- Active state is clearly visible.
+- Safe area padding is supported for mobile devices.
+
+Use appropriate bottom padding on pages so content is never hidden behind the navigation.
 
 ---
 
-## Requirements
+# Navigation and Header
 
-- Reuse the existing AI service.
-- Reuse the existing conversation persistence.
-- Do not create a second chat system.
-- Do not add unnecessary dependencies.
-- Use TypeScript strict mode.
-- Use existing design tokens.
-- Use Lucide React icons.
-- Do not use emojis.
-- Keep the application compiling.
+Ensure:
+
+- The header adapts to small screens.
+- Long titles do not overflow.
+- Buttons do not collide.
+- Menus fit within the viewport.
+- Accessibility controls remain usable.
+- Theme and language controls remain accessible.
+
+---
+
+# AI Assistant
+
+Review the chat interface on mobile.
+
+Ensure:
+
+- Messages wrap correctly.
+- Long messages do not overflow.
+- The input does not get hidden by bottom navigation.
+- Quick action buttons wrap correctly.
+- Guided AI buttons fit small screens.
+- The keyboard does not make the input unusable.
+- The send button remains accessible.
+
+---
+
+# Emergency Map
+
+Ensure:
+
+- The map has an appropriate responsive height.
+- Controls do not overlap.
+- Emergency service cards fit the viewport.
+- Get Directions buttons are fully visible.
+- Text has sufficient contrast.
+- Cards stack correctly on mobile.
+
+---
+
+# Emergency Reports
+
+Ensure:
+
+- Forms fit small screens.
+- Photo upload areas are responsive.
+- Image previews do not overflow.
+- Buttons stack when necessary.
+- Share and Send to Emergency Contact buttons remain visible.
+- Report details are readable on mobile.
+
+---
+
+# History
+
+Ensure:
+
+- AI conversations fit small screens.
+- Emergency reports fit small screens.
+- Long descriptions wrap correctly.
+- Cards do not overflow.
+- Detail pages are responsive.
+
+---
+
+# Accessibility
+
+Verify responsive behavior for:
+
+- Font size increase.
+- Dark mode.
+- Light mode.
+- Language switching.
+- Screen reading controls.
+
+The interface must remain usable when the font size is increased.
+
+---
+
+# Tailwind Requirements
+
+Use responsive Tailwind CSS utilities.
+
+Prefer:
+
+- Mobile-first styles.
+- `sm:`
+- `md:`
+- `lg:`
+- `xl:`
+
+Avoid:
+
+- Fixed widths that cause overflow.
+- Hardcoded viewport-breaking dimensions.
+- Excessive absolute positioning.
+- Negative margins that break mobile layouts.
+- Fixed heights for dynamic content.
+- Desktop-first layouts.
+
+Use:
+
+- `w-full`
+- `max-w-*`
+- `min-w-0`
+- `flex-wrap`
+- Responsive grids.
+- Responsive padding.
+- Responsive gaps.
+- `overflow-hidden` only when appropriate.
+
+---
+
+# Final Validation
+
+After making changes:
+
+1. Check every route.
+2. Check every main component.
+3. Check mobile layout.
+4. Check tablet layout.
+5. Check desktop layout.
+6. Check light mode.
+7. Check dark mode.
+8. Check increased font size.
+9. Check bottom navigation.
+10. Check horizontal overflow.
+
+The application must not have:
+
+- Horizontal scrolling caused by layout bugs.
+- Cut-off text.
+- Buttons outside the viewport.
+- Cards overflowing.
+- Content hidden behind bottom navigation.
+- Broken mobile layouts.
+
+Do not modify business logic.
+
+Do not add new features.
+
+Do not add unnecessary dependencies.
+
+Use the existing architecture and design system.
+
+Keep the project compiling.

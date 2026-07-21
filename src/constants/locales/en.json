@@ -154,11 +154,67 @@
   "footer": {
     "disclaimer": "Informational emergency assistant only. Does not replace professional medical services."
   },
+  "profile": {
+    "title": "Medical Profile",
+    "subtitle": "Your emergency medical information",
+    "saved": "Medical profile saved",
+    "cleared": "Medical profile cleared",
+    "clear": "Clear",
+    "save": "Save",
+    "personalInfo": "Personal Information",
+    "name": "Name",
+    "age": "Age",
+    "medicalInfo": "Medical Information",
+    "bloodType": "Blood Type",
+    "selectBloodType": "Select...",
+    "allergies": "Allergies",
+    "medications": "Medications",
+    "conditions": "Medical Conditions",
+    "emergencyContact": "Emergency Contact",
+    "contactName": "Contact Name",
+    "contactPhone": "Contact Phone",
+    "localNotice": "This information is stored only on your device. No data is sent to any server."
+  },
+  "report": {
+    "title": "Photo Report",
+    "subtitle": "Document an emergency with photo and description",
+    "capturePhoto": "Capture or upload a photo",
+    "description": "Description",
+    "descPlaceholder": "Describe what happened...",
+    "save": "Save Report",
+    "saved": "Report saved",
+    "savedReports": "Saved Reports",
+    "noDescription": "No description",
+    "unknownLocation": "Unknown location",
+    "copied": "Report copied to clipboard",
+    "deleted": "Report deleted",
+    "failedSave": "Failed to save report",
+    "failedDelete": "Failed to delete",
+    "unableToShare": "Unable to share",
+    "selectImage": "Please select an image file"
+  },
   "errors": {
     "locationDenied": "Location permission denied. Please enable it in your browser settings.",
     "locationUnavailable": "Location information is unavailable.",
     "locationTimeout": "The request to get your location timed out.",
     "locationUnknown": "An unknown error occurred while getting your location.",
     "geolocationUnsupported": "Geolocation is not supported by your browser."
+  },
+  "accessibility": {
+    "title": "Accessibility",
+    "theme": "Theme",
+    "light": "Light",
+    "dark": "Dark",
+    "system": "System",
+    "language": "Language",
+    "textSize": "Text Size",
+    "contrast": "Contrast",
+    "highContrast": "High Contrast",
+    "readAloud": "Read Aloud",
+    "readScreen": "Read Screen",
+    "stop": "Stop",
+    "resetAll": "Reset All Settings",
+    "on": "ON",
+    "off": "OFF"
   }
 }

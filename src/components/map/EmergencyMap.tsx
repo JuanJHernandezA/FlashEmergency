@@ -96,7 +96,7 @@ function EmergencyMap({ coordinates, services = [], selectedServiceId }: IEmerge
       zoom={15}
       scrollWheelZoom
       className="h-full w-full rounded-2xl"
-      style={{ minHeight: '400px' }}
+      style={{ minHeight: '280px' }}
     >
       <TileLayer
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'

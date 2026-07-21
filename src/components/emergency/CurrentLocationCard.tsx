@@ -117,20 +117,20 @@ function CurrentLocationCard({ coordinates }: ICurrentLocationCardProps) {
           <button
             type="button"
             onClick={handleShare}
-            className="flex h-9 flex-1 items-center justify-center gap-2 rounded-xl bg-primary-light text-xs font-semibold text-primary transition-all duration-200 hover:bg-primary/15 focus:outline-none focus:ring-2 focus:ring-primary/30"
+            className="flex h-9 flex-1 items-center justify-center gap-1.5 rounded-xl bg-primary-light text-[11px] font-semibold text-primary transition-all duration-200 hover:bg-primary/15 focus:outline-none focus:ring-2 focus:ring-primary/30"
             aria-label={t('sos.shareLocation')}
           >
-            <Share2 size={14} />
-            {t('sos.shareLocation')}
+            <Share2 size={13} />
+            <span className="hidden xs:inline sm:inline">{t('sos.shareLocation')}</span>
           </button>
           <button
             type="button"
             onClick={handleCopy}
-            className="flex h-9 flex-1 items-center justify-center gap-2 rounded-xl bg-secondary-light text-xs font-semibold text-secondary transition-all duration-200 hover:bg-secondary/15 focus:outline-none focus:ring-2 focus:ring-secondary/30"
+            className="flex h-9 flex-1 items-center justify-center gap-1.5 rounded-xl bg-secondary-light text-[11px] font-semibold text-secondary transition-all duration-200 hover:bg-secondary/15 focus:outline-none focus:ring-2 focus:ring-secondary/30"
             aria-label={t('sos.copyCoords')}
           >
-            <Copy size={14} />
-            {t('sos.copyCoords')}
+            <Copy size={13} />
+            <span className="hidden xs:inline sm:inline">{t('sos.copyCoords')}</span>
           </button>
           <a
             href={`https://www.google.com/maps/search/?api=1&query=${coordinates.latitude},${coordinates.longitude}`}

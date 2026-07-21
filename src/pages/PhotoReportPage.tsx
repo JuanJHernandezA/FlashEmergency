@@ -28,7 +28,7 @@ function PhotoReportPage() {
     const file = e.target.files?.[0];
     if (!file) return;
     if (!file.type.startsWith('image/')) {
-      toast.error('Please select an image file.');
+      toast.error(t('report.selectImage'));
       return;
     }
     const reader = new FileReader();
@@ -38,7 +38,7 @@ function PhotoReportPage() {
   };
 
   const handleSave = async () => {
-    if (!imagePreview) { toast.error('Please capture or select an image.'); return; }
+    if (!imagePreview) { toast.error(t('report.selectImage')); return; }
     setIsSaving(true);
 
     const locationName = location
@@ -62,7 +62,7 @@ function PhotoReportPage() {
       setDescription('');
       toast.success(t('report.saved', 'Report saved'));
     } catch {
-      toast.error('Failed to save report.');
+      toast.error(t('report.failedSave'));
     } finally {
       setIsSaving(false);
     }
@@ -80,9 +80,9 @@ function PhotoReportPage() {
 
     try {
       await navigator.clipboard.writeText(text);
-      toast.success('Report copied to clipboard');
+      toast.success(t('report.copied'));
     } catch {
-      toast.error('Unable to share');
+      toast.error(t('report.unableToShare'));
     }
   };
 
@@ -90,14 +90,14 @@ function PhotoReportPage() {
     try {
       await deleteReport(id);
       setReports((prev) => prev.filter((r) => r.id !== id));
-      toast.success('Report deleted');
+      toast.success(t('report.deleted'));
     } catch {
-      toast.error('Failed to delete');
+      toast.error(t('report.failedDelete'));
     }
   };
 
   return (
-    <div className="flex flex-1 flex-col gap-6 px-4 py-8 pb-28 md:pb-8 lg:px-8">
+    <div className="flex flex-1 flex-col gap-4 px-3 py-5 pb-20 sm:gap-6 sm:px-4 sm:py-8 md:pb-8 lg:px-8">
       {/* Header */}
       <div className="flex items-center gap-3">
         <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-secondary-light">
@@ -214,10 +214,10 @@ function PhotoReportPage() {
                     <img src={report.imageDataUrl} alt="Report" className="h-16 w-16 shrink-0 rounded-xl object-cover" />
                     <div className="flex-1 min-w-0">
                       <p className="truncate text-xs font-semibold text-text-primary">
-                        {report.description || 'No description'}
+                        {report.description || t('report.noDescription')}
                       </p>
                       <p className="mt-0.5 text-[10px] text-text-muted">
-                        {report.locationName ?? 'Unknown location'}
+                        {report.locationName ?? t('report.unknownLocation')}
                       </p>
                       <p className="text-[10px] text-text-muted">
                         {new Date(report.createdAt).toLocaleString()}

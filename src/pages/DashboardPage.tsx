@@ -52,7 +52,7 @@ function DashboardPage() {
   }, [services]);
 
   return (
-    <div className="flex flex-1 flex-col gap-6 px-4 py-8 pb-28 md:pb-8 lg:px-8">
+    <div className="flex flex-1 flex-col gap-4 px-3 py-5 pb-24 sm:gap-6 sm:px-4 sm:py-8 md:pb-8 lg:px-8">
       {/* Header */}
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-3">
@@ -113,9 +113,9 @@ function DashboardPage() {
           <StatsCards services={services} isLoading={servicesLoading} />
 
           {/* Map + Sidebar */}
-          <div className="grid flex-1 gap-6 lg:grid-cols-3">
-            <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.4 }} className="overflow-hidden rounded-3xl border border-border shadow-lg lg:col-span-2">
-              <Suspense fallback={<div className="flex min-h-[450px] items-center justify-center bg-card"><div className="h-10 w-10 animate-spin rounded-full border-4 border-primary-light border-t-primary" /></div>}>
+          <div className="grid flex-1 gap-4 sm:gap-6 lg:grid-cols-3">
+            <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.4 }} className="overflow-hidden rounded-2xl border border-border shadow-lg sm:rounded-3xl lg:col-span-2">
+              <Suspense fallback={<div className="flex min-h-[280px] items-center justify-center bg-card sm:min-h-[450px]"><div className="h-10 w-10 animate-spin rounded-full border-4 border-primary-light border-t-primary" /></div>}>
                 {isOnline ? (
                   <EmergencyMap coordinates={coordinates} services={filteredServices} selectedServiceId={selectedService?.id ?? null} />
                 ) : (
@@ -124,7 +124,7 @@ function DashboardPage() {
               </Suspense>
             </motion.div>
 
-            <motion.aside initial={{ opacity: 0, x: 16 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.4, delay: 0.1 }} className="flex flex-col rounded-3xl border border-border bg-card shadow-md lg:max-h-[600px]">
+            <motion.aside initial={{ opacity: 0, x: 16 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.4, delay: 0.1 }} className="flex max-h-[400px] flex-col rounded-2xl border border-border bg-card shadow-md sm:rounded-3xl lg:max-h-[600px]">
               <div className="border-b border-border px-5 py-4">
                 <div className="flex items-center gap-2.5">
                   <List size={16} className="text-primary" />

@@ -22,7 +22,7 @@ function CategoryFilter({ selected, onChange, counts }: ICategoryFilterProps) {
   const { t } = useTranslation();
 
   return (
-    <div className="flex gap-1.5 overflow-x-auto pb-0.5">
+    <div className="flex gap-1.5 overflow-x-auto pb-0.5 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
       {CATEGORIES.map(({ key, icon: Icon }) => {
         const isActive = selected === key;
         const label = key === 'all' ? t('categories.all') : t(`categories.${key}`);

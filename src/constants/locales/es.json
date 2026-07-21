@@ -154,11 +154,67 @@
   "footer": {
     "disclaimer": "Asistente informativo de emergencia. No reemplaza servicios médicos profesionales."
   },
+  "profile": {
+    "title": "Perfil Médico",
+    "subtitle": "Tu información médica de emergencia",
+    "saved": "Perfil médico guardado",
+    "cleared": "Perfil médico eliminado",
+    "clear": "Limpiar",
+    "save": "Guardar",
+    "personalInfo": "Información Personal",
+    "name": "Nombre",
+    "age": "Edad",
+    "medicalInfo": "Información Médica",
+    "bloodType": "Tipo de Sangre",
+    "selectBloodType": "Seleccionar...",
+    "allergies": "Alergias",
+    "medications": "Medicamentos",
+    "conditions": "Condiciones Médicas",
+    "emergencyContact": "Contacto de Emergencia",
+    "contactName": "Nombre del Contacto",
+    "contactPhone": "Teléfono del Contacto",
+    "localNotice": "Esta información se almacena solo en tu dispositivo. No se envía a ningún servidor."
+  },
+  "report": {
+    "title": "Reporte Fotográfico",
+    "subtitle": "Documenta una emergencia con foto y descripción",
+    "capturePhoto": "Captura o sube una foto",
+    "description": "Descripción",
+    "descPlaceholder": "Describe lo que pasó...",
+    "save": "Guardar Reporte",
+    "saved": "Reporte guardado",
+    "savedReports": "Reportes Guardados",
+    "noDescription": "Sin descripción",
+    "unknownLocation": "Ubicación desconocida",
+    "copied": "Reporte copiado al portapapeles",
+    "deleted": "Reporte eliminado",
+    "failedSave": "Error al guardar reporte",
+    "failedDelete": "Error al eliminar",
+    "unableToShare": "No se pudo compartir",
+    "selectImage": "Por favor selecciona un archivo de imagen"
+  },
   "errors": {
     "locationDenied": "Permiso de ubicación denegado. Por favor habilítalo en la configuración de tu navegador.",
     "locationUnavailable": "La información de ubicación no está disponible.",
     "locationTimeout": "La solicitud para obtener tu ubicación expiró.",
     "locationUnknown": "Ocurrió un error desconocido al obtener tu ubicación.",
     "geolocationUnsupported": "La geolocalización no es compatible con tu navegador."
+  },
+  "accessibility": {
+    "title": "Accesibilidad",
+    "theme": "Tema",
+    "light": "Claro",
+    "dark": "Oscuro",
+    "system": "Sistema",
+    "language": "Idioma",
+    "textSize": "Tamaño de Texto",
+    "contrast": "Contraste",
+    "highContrast": "Alto Contraste",
+    "readAloud": "Leer en Voz Alta",
+    "readScreen": "Leer Pantalla",
+    "stop": "Detener",
+    "resetAll": "Restablecer Todo",
+    "on": "SÍ",
+    "off": "NO"
   }
 }

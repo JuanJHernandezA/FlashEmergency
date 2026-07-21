@@ -103,21 +103,21 @@ function Navbar() {
       </header>
 
       <nav className="fixed bottom-0 left-0 right-0 z-50 border-t border-border/60 bg-card/80 backdrop-blur-xl md:hidden" aria-label="Mobile navigation">
-        <ul className="mx-auto flex max-w-md justify-around px-2 py-2">
-          {NAV_ITEMS.map(({ to, label, icon: Icon }) => (
+        <ul className="mx-auto flex max-w-md justify-around px-1 py-1.5">
+          {NAV_ITEMS.slice(0, 5).map(({ to, label, icon: Icon }) => (
             <li key={to}>
               <Link
                 to={to}
                 aria-label={label}
-                className={`relative flex flex-col items-center gap-0.5 rounded-2xl px-3 py-2 text-[10px] font-medium transition-all duration-200 ${
+                className={`relative flex flex-col items-center gap-0.5 rounded-2xl px-2 py-1.5 text-[9px] font-medium transition-all duration-200 ${
                   pathname === to ? 'text-primary' : 'text-text-muted'
                 }`}
               >
                 {pathname === to && (
                   <motion.span layoutId="mobile-nav-active" className="absolute inset-0 rounded-2xl bg-primary-light" transition={{ type: 'spring', stiffness: 400, damping: 30 }} />
                 )}
-                <Icon size={20} className="relative z-10" />
-                <span className="relative z-10">{label}</span>
+                <Icon size={18} className="relative z-10" />
+                <span className="relative z-10 truncate">{label}</span>
               </Link>
             </li>
           ))}

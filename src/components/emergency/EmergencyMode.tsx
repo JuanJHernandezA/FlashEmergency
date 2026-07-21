@@ -72,7 +72,7 @@ function EmergencyMode({ onClose }: IEmergencyModeProps) {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      className="fixed inset-0 z-[100] flex flex-col overflow-y-auto bg-[#1a0000]"
+      className="fixed inset-0 z-[100] flex flex-col overflow-y-auto bg-[#1a0000]" style={{ paddingBottom: 'env(safe-area-inset-bottom, 0px)' }}
     >
       {/* Header */}
       <div className="flex items-center justify-between bg-danger px-4 py-3 sm:px-6">
@@ -117,7 +117,7 @@ function EmergencyMode({ onClose }: IEmergencyModeProps) {
             <span className="text-xs font-bold uppercase tracking-wider text-white/60">GPS</span>
           </div>
           {coordinates ? (
-            <p className="mt-2 font-mono text-lg font-bold text-white">
+            <p className="mt-2 break-all font-mono text-base font-bold text-white sm:text-lg">
               {coordinates.latitude.toFixed(6)}, {coordinates.longitude.toFixed(6)}
             </p>
           ) : (
