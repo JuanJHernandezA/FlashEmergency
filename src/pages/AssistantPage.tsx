@@ -206,7 +206,7 @@ function AssistantPage() {
 
       {/* Chat area */}
       <div className="flex flex-1 flex-col overflow-hidden">
-        <div className="flex-1 overflow-y-auto px-4 py-8 lg:px-8">
+        <div className="flex-1 overflow-y-auto px-3 py-6 sm:px-4 lg:px-8">
           <div className="mx-auto flex max-w-4xl flex-col gap-5">
             {/* Empty state */}
             {messages.length === 0 && !isLoading && (
@@ -295,7 +295,7 @@ function AssistantPage() {
         </div>
 
         {/* Input area */}
-        <div className="border-t border-border/60 bg-card/80 px-4 py-4 backdrop-blur-sm lg:px-8">
+        <div className="border-t border-border/60 bg-card/80 px-3 py-3 backdrop-blur-sm sm:px-4 sm:py-4 lg:px-8">
           <div className="mx-auto max-w-4xl">
             <ChatInput
               onSend={handleSend}
