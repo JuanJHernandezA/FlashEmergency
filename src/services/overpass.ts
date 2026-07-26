@@ -68,8 +68,6 @@ export async function fetchNearbyServices(
   coordinates: ICoordinates,
   radiusMeters: number = 5000,
 ): Promise<IEmergencyService[]> {
-  if (!navigator.onLine) return [];
-
   const query = buildQuery(coordinates, radiusMeters);
 
   const response = await axios.post<IOverpassResponse>(
