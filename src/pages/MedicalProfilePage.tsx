@@ -1,11 +1,13 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { HeartPulse, Save, Trash2, User, Droplets, AlertCircle, Phone } from 'lucide-react';
+import { HeartPulse, Save, Trash2, User, Droplets, AlertCircle, Phone, QrCode, ArrowRight } from 'lucide-react';
 import { toast } from 'sonner';
 import { useTranslation } from 'react-i18next';
+import { Link } from 'react-router-dom';
 import Button from '../components/ui/Button';
 import useMedicalProfile from '../hooks/useMedicalProfile';
 import { BLOOD_TYPES, type IMedicalProfile } from '../types/medicalProfile';
+import { ROUTES } from '../constants';
 
 function MedicalProfilePage() {
   const { t } = useTranslation();
@@ -227,6 +229,22 @@ function MedicalProfilePage() {
             {t('profile.localNotice', 'This information is stored only on your device. No data is sent to any server.')}
           </p>
         </div>
+
+        {/* QR Card link */}
+        {profile && (
+          <Link to={ROUTES.QR_CARD} className="block">
+            <div className="flex items-center gap-3 rounded-2xl border border-border bg-card p-4 shadow-sm transition-all hover:border-primary/20 hover:shadow-md">
+              <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-primary-light">
+                <QrCode size={20} className="text-primary" />
+              </div>
+              <div className="flex-1 min-w-0">
+                <p className="text-sm font-semibold text-text-primary">{t('qr.title', 'Emergency QR Card')}</p>
+                <p className="text-[11px] text-text-muted">{t('qr.subtitle', 'Show this QR code to first responders')}</p>
+              </div>
+              <ArrowRight size={16} className="shrink-0 text-text-muted" />
+            </div>
+          </Link>
+        )}
       </motion.div>
     </div>
   );

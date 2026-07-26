@@ -1,8 +1,9 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { QrCode, Download, Maximize2, X, AlertCircle } from 'lucide-react';
+import { QrCode, Download, Maximize2, X, AlertCircle, Share2, Copy, User } from 'lucide-react';
 import QRCode from 'qrcode';
 import { useTranslation } from 'react-i18next';
+import { toast } from 'sonner';
 import Button from '../components/ui/Button';
 import useMedicalProfile from '../hooks/useMedicalProfile';
 import { ROUTES } from '../constants';
@@ -13,19 +14,25 @@ function QRCardPage() {
   const { profile } = useMedicalProfile();
   const [qrDataUrl, setQrDataUrl] = useState<string | null>(null);
   const [isFullscreen, setIsFullscreen] = useState(false);
-  const canvasRef = useRef<HTMLCanvasElement>(null);
 
-  const qrContent = profile
-    ? JSON.stringify({
+  const profileData = profile
+    ? {
         name: profile.name || undefined,
         blood: profile.bloodType || undefined,
         allergies: profile.allergies || undefined,
         medications: profile.medications || undefined,
+        conditions: profile.medicalConditions || undefined,
         emergencyContact: profile.emergencyContactPhone
           ? `${profile.emergencyContactName || ''} ${profile.emergencyContactPhone}`.trim()
           : undefined,
-      })
+      }
     : null;
+
+  const qrContent = profileData ? JSON.stringify(profileData) : null;
+
+  const profileUrl = typeof window !== 'undefined'
+    ? `${window.location.origin}${ROUTES.QR_CARD}`
+    : '';
 
   useEffect(() => {
     if (!qrContent) {
@@ -34,7 +41,7 @@ function QRCardPage() {
     }
 
     QRCode.toDataURL(qrContent, {
-      width: 300,
+      width: 320,
       margin: 2,
       color: { dark: '#0f172a', light: '#ffffff' },
       errorCorrectionLevel: 'M',
@@ -46,15 +53,52 @@ function QRCardPage() {
   const handleDownload = () => {
     if (!qrDataUrl) return;
     const link = document.createElement('a');
-    link.download = 'emergency-qr-card.png';
+    link.download = `flashemergency-qr-${profile?.name?.replace(/\s+/g, '-').toLowerCase() || 'card'}.png`;
     link.href = qrDataUrl;
     link.click();
+    toast.success(t('qr.downloaded', 'QR code downloaded'));
+  };
+
+  const handleShare = async () => {
+    const shareText = profile
+      ? `${profile.name || 'Emergency'} - Medical QR Card\nBlood: ${profile.bloodType || 'N/A'}\nAllergies: ${profile.allergies || 'None'}\nContact: ${profile.emergencyContactName || ''} ${profile.emergencyContactPhone || ''}`
+      : '';
+
+    if (navigator.share) {
+      try {
+        await navigator.share({
+          title: 'FlashEmergency - Medical QR Card',
+          text: shareText,
+          url: profileUrl,
+        });
+        return;
+      } catch {
+        // User cancelled or share failed, fall through to copy
+      }
+    }
+
+    // Fallback: copy to clipboard
+    try {
+      await navigator.clipboard.writeText(`${shareText}\n\n${profileUrl}`);
+      toast.success(t('qr.linkCopied', 'Profile info copied to clipboard'));
+    } catch {
+      toast.error(t('sos.failedCopy', 'Failed to copy'));
+    }
+  };
+
+  const handleCopyLink = async () => {
+    try {
+      await navigator.clipboard.writeText(profileUrl);
+      toast.success(t('qr.linkCopied', 'Link copied to clipboard'));
+    } catch {
+      toast.error(t('sos.failedCopy', 'Failed to copy'));
+    }
   };
 
   const hasProfile = profile && (profile.name || profile.bloodType || profile.allergies || profile.medications || profile.emergencyContactPhone);
 
   return (
-    <div className="flex flex-1 flex-col gap-6 px-4 py-8 pb-28 md:pb-8 lg:px-8">
+    <div className="flex flex-1 flex-col gap-4 px-3 py-5 sm:gap-6 sm:px-4 sm:py-8 lg:px-8">
       {/* Header */}
       <div className="flex items-center gap-3">
         <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-primary-light">
@@ -75,7 +119,7 @@ function QRCardPage() {
         <motion.div
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
-          className="flex flex-1 flex-col items-center justify-center gap-4 rounded-2xl border border-dashed border-border bg-card/50 p-12 text-center"
+          className="flex flex-1 flex-col items-center justify-center gap-4 rounded-2xl border border-dashed border-border bg-card/50 p-8 text-center sm:p-12"
         >
           <QrCode size={48} className="text-text-muted/30" />
           <div>
@@ -101,64 +145,102 @@ function QRCardPage() {
           animate={{ opacity: 1, y: 0 }}
           className="mx-auto w-full max-w-sm"
         >
-          <div className="rounded-2xl border border-border bg-card p-6 shadow-md">
+          <div className="overflow-hidden rounded-2xl border border-border bg-card shadow-md">
+            {/* Card header with user info */}
+            <div className="bg-gradient-to-r from-primary to-primary-hover px-5 py-4">
+              <div className="flex items-center gap-3">
+                <div className="flex h-12 w-12 items-center justify-center rounded-full bg-white/20 text-lg font-bold text-white">
+                  {profile.name ? profile.name.charAt(0).toUpperCase() : <User size={20} />}
+                </div>
+                <div className="min-w-0 flex-1">
+                  <p className="truncate text-sm font-bold text-white">
+                    {profile.name || t('profile.name', 'Name')}
+                  </p>
+                  {profile.bloodType && (
+                    <span className="mt-0.5 inline-block rounded-md bg-white/20 px-2 py-0.5 text-[10px] font-bold text-white">
+                      {profile.bloodType}
+                    </span>
+                  )}
+                </div>
+              </div>
+            </div>
+
             {/* QR Image */}
-            <div className="flex justify-center">
+            <div className="flex justify-center px-6 py-5">
               <img
                 src={qrDataUrl}
                 alt="Emergency QR Code"
-                className="h-64 w-64 rounded-xl"
+                className="h-56 w-56 rounded-xl sm:h-64 sm:w-64"
               />
             </div>
 
             {/* Profile summary */}
-            <div className="mt-5 space-y-2 rounded-xl bg-background p-4">
-              {profile.name && (
-                <p className="text-sm font-semibold text-text-primary">{profile.name}</p>
-              )}
-              {profile.bloodType && (
-                <p className="text-xs text-text-secondary">
-                  <span className="font-semibold text-danger">{profile.bloodType}</span>
-                </p>
-              )}
+            <div className="mx-5 mb-5 space-y-1.5 rounded-xl bg-background p-4">
               {profile.allergies && (
                 <p className="text-xs text-text-secondary">
-                  {t('profile.allergies', 'Allergies')}: {profile.allergies}
+                  <span className="font-semibold text-danger">{t('profile.allergies', 'Allergies')}:</span> {profile.allergies}
                 </p>
               )}
               {profile.medications && (
                 <p className="text-xs text-text-secondary">
-                  {t('profile.medications', 'Medications')}: {profile.medications}
+                  <span className="font-semibold text-primary">{t('profile.medications', 'Medications')}:</span> {profile.medications}
+                </p>
+              )}
+              {profile.medicalConditions && (
+                <p className="text-xs text-text-secondary">
+                  <span className="font-semibold text-warning">{t('profile.conditions', 'Conditions')}:</span> {profile.medicalConditions}
                 </p>
               )}
               {profile.emergencyContactPhone && (
                 <p className="text-xs text-text-secondary">
-                  {t('profile.emergencyContact', 'Contact')}: {profile.emergencyContactName} {profile.emergencyContactPhone}
+                  <span className="font-semibold text-success">{t('profile.emergencyContact', 'Contact')}:</span> {profile.emergencyContactName} {profile.emergencyContactPhone}
                 </p>
               )}
             </div>
 
             {/* Actions */}
-            <div className="mt-5 flex gap-3">
-              <Button
-                size="sm"
-                className="flex-1"
-                icon={<Maximize2 size={14} />}
-                onClick={() => setIsFullscreen(true)}
-                aria-label={t('qr.fullscreen', 'Fullscreen')}
-              >
-                {t('qr.fullscreen', 'Fullscreen')}
-              </Button>
-              <Button
-                size="sm"
-                variant="outline"
-                className="flex-1"
-                icon={<Download size={14} />}
-                onClick={handleDownload}
-                aria-label={t('qr.download', 'Download')}
-              >
-                {t('qr.download', 'Download')}
-              </Button>
+            <div className="border-t border-border px-5 py-4">
+              <div className="grid grid-cols-2 gap-2 sm:grid-cols-4">
+                <Button
+                  size="sm"
+                  className="w-full"
+                  icon={<Share2 size={13} />}
+                  onClick={handleShare}
+                  aria-label={t('qr.share', 'Share')}
+                >
+                  {t('qr.share', 'Share')}
+                </Button>
+                <Button
+                  size="sm"
+                  variant="outline"
+                  className="w-full"
+                  icon={<Copy size={13} />}
+                  onClick={handleCopyLink}
+                  aria-label={t('qr.copyLink', 'Copy Link')}
+                >
+                  {t('qr.copyLink', 'Link')}
+                </Button>
+                <Button
+                  size="sm"
+                  variant="ghost"
+                  className="w-full"
+                  icon={<Download size={13} />}
+                  onClick={handleDownload}
+                  aria-label={t('qr.download', 'Download')}
+                >
+                  {t('qr.download', 'Download')}
+                </Button>
+                <Button
+                  size="sm"
+                  variant="ghost"
+                  className="w-full"
+                  icon={<Maximize2 size={13} />}
+                  onClick={() => setIsFullscreen(true)}
+                  aria-label={t('qr.fullscreen', 'Fullscreen')}
+                >
+                  {t('qr.fullscreen', 'Full')}
+                </Button>
+              </div>
             </div>
           </div>
 
@@ -177,7 +259,7 @@ function QRCardPage() {
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          className="fixed inset-0 z-[100] flex items-center justify-center bg-white"
+          className="fixed inset-0 z-[100] flex flex-col items-center justify-center bg-white"
           onClick={() => setIsFullscreen(false)}
         >
           <button
@@ -188,11 +270,15 @@ function QRCardPage() {
           >
             <X size={20} />
           </button>
-          <img src={qrDataUrl} alt="Emergency QR Code" className="h-[80vmin] w-[80vmin] max-h-[500px] max-w-[500px]" />
+          {profile?.name && (
+            <p className="mb-4 text-lg font-bold text-text-primary">{profile.name}</p>
+          )}
+          <img src={qrDataUrl} alt="Emergency QR Code" className="h-[70vmin] w-[70vmin] max-h-[400px] max-w-[400px] rounded-2xl" />
+          {profile?.bloodType && (
+            <p className="mt-4 rounded-lg bg-danger-light px-4 py-2 text-sm font-bold text-danger">{profile.bloodType}</p>
+          )}
         </motion.div>
       )}
-
-      <canvas ref={canvasRef} className="hidden" />
     </div>
   );
 }
