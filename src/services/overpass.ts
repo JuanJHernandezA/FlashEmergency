@@ -128,7 +128,11 @@ export async function fetchNearbyServices(
   coordinates: ICoordinates,
   radiusMeters: number = 5000,
 ): Promise<IEmergencyService[]> {
-  // Cambio aquí: pasamos coordinates y radiusMeters
+  // Guard: don't fetch if coordinates are invalid
+  if (!coordinates || !coordinates.latitude || !coordinates.longitude) {
+    return [];
+  }
+
   const data = await queryOverpass(coordinates, radiusMeters);
 
   const services: IEmergencyService[] = data.elements
