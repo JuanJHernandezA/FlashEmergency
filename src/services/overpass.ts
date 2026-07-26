@@ -1,7 +1,11 @@
 import axios from 'axios';
 import type { ICoordinates, IEmergencyService, EmergencyCategory } from '../types';
 
-const OVERPASS_API_URL = 'https://overpass-api.de/api/interpreter';
+// Primary and fallback Overpass API endpoints
+const OVERPASS_ENDPOINTS = [
+  'https://overpass-api.de/api/interpreter',
+  'https://overpass.kumi.systems/api/interpreter',
+];
 
 const CATEGORY_QUERIES: Record<EmergencyCategory, string> = {
   hospital: '["amenity"="hospital"]',
@@ -34,7 +38,7 @@ function buildQuery(coordinates: ICoordinates, radiusMeters: number): string {
     )
     .join('');
 
-  return `[out:json][timeout:15];(${filters});out center;`;
+  return `[out:json][timeout:25];(${filters});out center;`;
 }
 
 function getCategory(tags: Record<string, string>): EmergencyCategory {
@@ -64,19 +68,45 @@ function calculateDistance(
   return R * c;
 }
 
+async function queryOverpass(query: string): Promise<IOverpassResponse> {
+  const encodedData = `data=${encodeURIComponent(query)}`;
+
+  for (const endpoint of OVERPASS_ENDPOINTS) {
+    try {
+      const response = await axios.post<IOverpassResponse>(
+        endpoint,
+        encodedData,
+        {
+          headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+          },
+          timeout: 30000,
+        },
+      );
+
+      if (response.data && response.data.elements) {
+        return response.data;
+      }
+    } catch (err) {
+      // If this endpoint failed, try the next one
+      console.warn(`Overpass endpoint failed: ${endpoint}`, err);
+      continue;
+    }
+  }
+
+  // All endpoints failed
+  throw new Error('All Overpass API endpoints are unavailable');
+}
+
 export async function fetchNearbyServices(
   coordinates: ICoordinates,
   radiusMeters: number = 5000,
 ): Promise<IEmergencyService[]> {
   const query = buildQuery(coordinates, radiusMeters);
 
-  const response = await axios.post<IOverpassResponse>(
-    OVERPASS_API_URL,
-    `data=${encodeURIComponent(query)}`,
-    { headers: { 'Content-Type': 'application/x-www-form-urlencoded' } },
-  );
+  const data = await queryOverpass(query);
 
-  const services: IEmergencyService[] = response.data.elements
+  const services: IEmergencyService[] = data.elements
     .filter((el) => {
       const lat = el.lat ?? el.center?.lat;
       const lon = el.lon ?? el.center?.lon;
