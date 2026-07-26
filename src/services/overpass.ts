@@ -68,49 +68,68 @@ function calculateDistance(
   return R * c;
 }
 
-async function queryOverpass(query: string): Promise<IOverpassResponse> {
+async function queryOverpass(coordinates: ICoordinates, radiusMeters: number): Promise<IOverpassResponse> {
+  const { latitude, longitude } = coordinates;
+
+  // 1. Intentar primero a través de nuestra Serverless Function en Vercel
+  try {
+    const response = await fetch(`/api/overpass?lat=${latitude}&lng=${longitude}&radius=${radiusMeters}`);
+    if (response.ok) {
+      const data: IOverpassResponse = await response.json();
+      if (data && Array.isArray(data.elements)) {
+        return data;
+      }
+    }
+  } catch (err) {
+    console.warn('Proxy interno /api/overpass falló, intentando respaldo directo...', err);
+  }
+
+  // 2. Fallback a endpoints públicos en caso de estar probando en local sin Vercel CLI
+  const query = buildQuery(coordinates, radiusMeters);
   const params = new URLSearchParams();
   params.append('data', query);
 
-  for (const endpoint of OVERPASS_ENDPOINTS) {
+  const EXTERNAL_ENDPOINTS = [
+    'https://lz4.overpass-api.de/api/interpreter',
+    'https://overpass.kumi.systems/api/interpreter',
+    'https://overpass.private.coffee/api/interpreter',
+  ];
+
+  for (const endpoint of EXTERNAL_ENDPOINTS) {
     try {
       const controller = new AbortController();
-      const timeoutId = setTimeout(() => controller.abort(), 25000);
+      const timeoutId = setTimeout(() => controller.abort(), 20000);
 
       const response = await fetch(endpoint, {
         method: 'POST',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
+        },
         body: params,
         signal: controller.signal,
       });
 
       clearTimeout(timeoutId);
 
-      if (!response.ok) {
-        throw new Error(`HTTP ${response.status}`);
-      }
+      if (!response.ok) throw new Error(`HTTP ${response.status}`);
 
       const data: IOverpassResponse = await response.json();
+      if (data && Array.isArray(data.elements)) return data;
 
-      if (data && Array.isArray(data.elements)) {
-        return data;
-      }
-
-      throw new Error('Invalid response structure');
     } catch (err) {
-      console.warn(`Overpass endpoint failed: ${endpoint}`, err instanceof Error ? err.message : err);
-      continue;
+      console.warn(`Endpoint directo falló: ${endpoint}`, err instanceof Error ? err.message : err);
     }
   }
 
-  throw new Error('All Overpass API endpoints are unavailable.');
+  throw new Error('Todos los servicios de Overpass están fuera de línea.');
 }
 
 export async function fetchNearbyServices(
   coordinates: ICoordinates,
   radiusMeters: number = 5000,
 ): Promise<IEmergencyService[]> {
-  const query = buildQuery(coordinates, radiusMeters);
-  const data = await queryOverpass(query);
+  // Cambio aquí: pasamos coordinates y radiusMeters
+  const data = await queryOverpass(coordinates, radiusMeters);
 
   const services: IEmergencyService[] = data.elements
     .filter((el) => {
