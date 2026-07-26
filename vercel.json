@@ -3,6 +3,7 @@
   "outputDirectory": "dist",
   "framework": "vite",
   "rewrites": [
+    { "source": "/api/overpass", "destination": "https://lz4.overpass-api.de/api/interpreter" },
     { "source": "/(.*)", "destination": "/index.html" }
   ],
   "headers": [
