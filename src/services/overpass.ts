@@ -1,11 +1,11 @@
 import type { ICoordinates, IEmergencyService, EmergencyCategory } from '../types';
 
-const OVERPASS_ENDPOINTS = [
-  '/api/overpass',
-  'https://lz4.overpass-api.de/api/interpreter',
-  'https://overpass.kumi.systems/api/interpreter',
-  'https://overpass.private.coffee/api/interpreter',
-];
+// const OVERPASS_ENDPOINTS = [
+//   '/api/overpass',
+//   'https://lz4.overpass-api.de/api/interpreter',
+//   'https://overpass.kumi.systems/api/interpreter',
+//   'https://overpass.private.coffee/api/interpreter',
+// ];
 
 const CATEGORY_QUERIES: Record<EmergencyCategory, string> = {
   hospital: '["amenity"="hospital"]',
