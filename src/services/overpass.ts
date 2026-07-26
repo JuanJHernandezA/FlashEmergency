@@ -1,10 +1,10 @@
-import axios from 'axios';
 import type { ICoordinates, IEmergencyService, EmergencyCategory } from '../types';
 
-// Primary and fallback Overpass API endpoints
 const OVERPASS_ENDPOINTS = [
-  'https://overpass-api.de/api/interpreter',
+  'https://lz4.overpass-api.de/api/interpreter',
   'https://overpass.kumi.systems/api/interpreter',
+  'https://overpass.private.coffee/api/interpreter',
+  'https://overpass-api.de/api/interpreter',
 ];
 
 const CATEGORY_QUERIES: Record<EmergencyCategory, string> = {
@@ -38,7 +38,7 @@ function buildQuery(coordinates: ICoordinates, radiusMeters: number): string {
     )
     .join('');
 
-  return `[out:json][timeout:25];(${filters});out center;`;
+  return `[out:json][timeout:20];(${filters});out center;`;
 }
 
 function getCategory(tags: Record<string, string>): EmergencyCategory {
@@ -69,33 +69,42 @@ function calculateDistance(
 }
 
 async function queryOverpass(query: string): Promise<IOverpassResponse> {
-  const encodedData = `data=${encodeURIComponent(query)}`;
+  const body = 'data=' + encodeURIComponent(query);
 
   for (const endpoint of OVERPASS_ENDPOINTS) {
     try {
-      const response = await axios.post<IOverpassResponse>(
-        endpoint,
-        encodedData,
-        {
-          headers: {
-            'Content-Type': 'application/x-www-form-urlencoded',
-          },
-          timeout: 30000,
-        },
-      );
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), 25000);
 
-      if (response.data && response.data.elements) {
-        return response.data;
+      const response = await fetch(endpoint, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
+        },
+        body,
+        signal: controller.signal,
+      });
+
+      clearTimeout(timeoutId);
+
+      if (!response.ok) {
+        throw new Error(`HTTP ${response.status}`);
       }
+
+      const data: IOverpassResponse = await response.json();
+
+      if (data && Array.isArray(data.elements)) {
+        return data;
+      }
+
+      throw new Error('Invalid response structure');
     } catch (err) {
-      // If this endpoint failed, try the next one
-      console.warn(`Overpass endpoint failed: ${endpoint}`, err);
+      console.warn(`Overpass endpoint failed: ${endpoint}`, err instanceof Error ? err.message : err);
       continue;
     }
   }
 
-  // All endpoints failed
-  throw new Error('All Overpass API endpoints are unavailable');
+  throw new Error('All Overpass API endpoints are unavailable.');
 }
 
 export async function fetchNearbyServices(
@@ -103,7 +112,6 @@ export async function fetchNearbyServices(
   radiusMeters: number = 5000,
 ): Promise<IEmergencyService[]> {
   const query = buildQuery(coordinates, radiusMeters);
-
   const data = await queryOverpass(query);
 
   const services: IEmergencyService[] = data.elements

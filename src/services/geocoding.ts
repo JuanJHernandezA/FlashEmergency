@@ -1,4 +1,3 @@
-import axios from 'axios';
 import type { ICoordinates } from '../types';
 import type { ILocationDetails } from '../types/location';
 
@@ -27,24 +26,14 @@ export interface ICountryInfo {
 
 export async function reverseGeocodeDetailed(coordinates: ICoordinates): Promise<ILocationDetails | null> {
   try {
-    const response = await axios.get<INominatimResponse>(
-      'https://nominatim.openstreetmap.org/reverse',
-      {
-        params: {
-          lat: coordinates.latitude,
-          lon: coordinates.longitude,
-          format: 'json',
-          zoom: 18,
-          addressdetails: 1,
-        },
-        headers: {
-          'User-Agent': 'FlashEmergency/1.0',
-        },
-        timeout: 8000,
-      },
-    );
+    const url = `https://nominatim.openstreetmap.org/reverse?lat=${coordinates.latitude}&lon=${coordinates.longitude}&format=json&zoom=18&addressdetails=1`;
 
-    const address = response.data.address;
+    const response = await fetch(url, { signal: AbortSignal.timeout(10000) });
+
+    if (!response.ok) return null;
+
+    const data: INominatimResponse = await response.json();
+    const address = data.address;
     if (!address?.country_code) return null;
 
     const city = address.city ?? address.town ?? address.village ?? address.municipality ?? null;
