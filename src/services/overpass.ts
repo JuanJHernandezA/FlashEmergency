@@ -69,7 +69,8 @@ function calculateDistance(
 }
 
 async function queryOverpass(query: string): Promise<IOverpassResponse> {
-  const body = 'data=' + encodeURIComponent(query);
+  const params = new URLSearchParams();
+  params.append('data', query);
 
   for (const endpoint of OVERPASS_ENDPOINTS) {
     try {
@@ -78,10 +79,7 @@ async function queryOverpass(query: string): Promise<IOverpassResponse> {
 
       const response = await fetch(endpoint, {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
-        },
-        body,
+        body: params,
         signal: controller.signal,
       });
 
